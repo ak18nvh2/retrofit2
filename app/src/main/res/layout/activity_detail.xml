@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="30dp"
+    tools:context=".DetailActivity">
+
+    <ImageView
+        android:id="@+id/img_DetailAvatar"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@mipmap/ic_launcher"
+        android:adjustViewBounds="true"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toTopOf="@id/tv_DetailID"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        ></ImageView>
+
+    <TextView
+        android:id="@+id/tv_DetailID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ID: 100"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@id/tv_DetailName"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/img_DetailAvatar"></TextView>
+
+    <TextView
+        android:id="@+id/tv_DetailName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name: Nguyen Trung Minh Hieu"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@id/tv_DetailAge"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_DetailID"></TextView>
+
+    <TextView
+        android:id="@+id/tv_DetailAge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Age: 20"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@id/tv_DetailEmail"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_DetailName"></TextView>
+
+    <TextView
+        android:id="@+id/tv_DetailEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email: hieuhaui12@gmail.com"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_DetailCreateAt"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_DetailAge"></TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_DetailCreateAt"
+        android:text="Created at: 2020"
+        android:textSize="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_DetailEmail"
+        app:layout_constraintBottom_toTopOf="@id/tv_DetailUpdateAt"
+        ></TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_DetailUpdateAt"
+        android:textSize="20dp"
+        android:text="Update at: 2021"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_DetailCreateAt"
+        app:layout_constraintBottom_toTopOf="@id/tv_DetailApiOriginated">
+    </TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_DetailApiOriginated"
+        android:textSize="20dp"
+        android:text="Api originated: True"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_DetailUpdateAt"
+        app:layout_constraintBottom_toBottomOf="parent"></TextView>
+
+    <ImageView
+        android:id="@+id/btn_BackDetail"
+        android:layout_width="32dp"
+        android:layout_height="wrap_content"
+
+        android:src="@drawable/backbtn"
+        android:text="Back"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        ></ImageView>
+</androidx.constraintlayout.widget.ConstraintLayout>
