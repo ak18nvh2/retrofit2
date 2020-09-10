@@ -6,7 +6,7 @@
     <data>
         <variable
             name="contact"
-            type="com.example.testretrofit2.Contact" />
+            type="com.example.testretrofit2.models.Contact" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,7 +19,7 @@
             android:id="@+id/img_DetailAvatar"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:src="@{contact.customFields[1].value}"
+            android:src="@{contact.customFields[1].value }"
             android:adjustViewBounds="true"
             android:scaleType="centerInside"
             app:layout_constraintBottom_toTopOf="@id/tv_DetailID"
@@ -27,11 +27,12 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"></ImageView>
 
+
         <TextView
             android:id="@+id/tv_DetailID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{contact.contactId}"
+            android:text="@{contact.contactId, default=default_id}"
             android:textSize="20dp"
             app:layout_constraintBottom_toTopOf="@id/tv_DetailName"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -41,7 +42,8 @@
             android:id="@+id/tv_DetailName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{contact.name}"
+            android:layout_marginRight="168dp"
+            android:text="@{contact.lastName + contact.firstName, default=default_name}"
             android:textSize="20dp"
             app:layout_constraintBottom_toTopOf="@id/tv_DetailAge"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -51,7 +53,7 @@
             android:id="@+id/tv_DetailAge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{contact.customFields[0].value}"
+            android:text="@{contact.customFields[0].value, default=default_id}"
             android:textSize="20dp"
             app:layout_constraintBottom_toTopOf="@id/tv_DetailEmail"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -61,7 +63,7 @@
             android:id="@+id/tv_DetailEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{contact.email}"
+            android:text="@{contact.email, default=default_id}"
             android:textSize="20dp"
             app:layout_constraintBottom_toTopOf="@+id/tv_DetailCreateAt"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -71,7 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tv_DetailCreateAt"
-            android:text="@{contact.createdAt}"
+            android:text="@{contact.createdAt, default=default_id}"
             android:textSize="20dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_DetailEmail"
@@ -82,7 +84,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/tv_DetailUpdateAt"
             android:textSize="20dp"
-            android:text="@{contact.updatedAt}"
+            android:text="@{contact.updatedAt, default=default_id}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_DetailCreateAt"
             app:layout_constraintBottom_toTopOf="@id/tv_DetailApiOriginated"></TextView>
@@ -92,7 +94,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/tv_DetailApiOriginated"
             android:textSize="20dp"
-            android:text="@{contact.apiOriginated.toString()}"
+            android:text="@{contact.apiOriginated.toString(), default=default_id}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_DetailUpdateAt"
             app:layout_constraintBottom_toBottomOf="parent"></TextView>

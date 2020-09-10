@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-
+import com.example.testretrofit2.models.Contact
 
 
 class ContactAdapter(var mContext : Context, var iRecyclerViewWithHomeActivity: IRecyclerViewWithHomeActivity) : RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
@@ -30,7 +30,7 @@ class ContactAdapter(var mContext : Context, var iRecyclerViewWithHomeActivity: 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.id.text = "ID: "+ list?.get(position)?.contactId
-        holder.name.text = "Name: "+list?.get(position)?.lastName + " " + list?.get(position)?.firstName
+        holder.name.text = "Name: "+list?.get(position)?.lastName  + list?.get(position)?.firstName
         holder.itemView.setOnClickListener(){
             iRecyclerViewWithHomeActivity.doSomeThingOnClick(list?.get(position)!!)
         }

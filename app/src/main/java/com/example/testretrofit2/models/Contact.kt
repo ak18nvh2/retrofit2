@@ -1,5 +1,6 @@
-package com.example.testretrofit2
+package com.example.testretrofit2.models
 
+import com.example.testretrofit2.CustomField
 import com.google.gson.annotations.Expose
 
 import com.google.gson.annotations.SerializedName

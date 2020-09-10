@@ -9,33 +9,34 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
-import android.view.WindowManager
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.lifecycle.ViewModelProviders
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
+import com.example.testretrofit2.models.Contact
 import kotlinx.android.synthetic.main.activity_create_update_employee.*
-import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.dialog_processbar.*
-import kotlinx.android.synthetic.main.dialog_select.*
 import kotlinx.android.synthetic.main.dialog_yes_no.*
 import kotlinx.android.synthetic.main.dialog_yes_no.tv_TitleOfCustomDialogConfirm
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class CreateAndUpdateEmployee : AppCompatActivity(), View.OnClickListener {
+class CreateAndUpdateEmployeeActivity : AppCompatActivity(), View.OnClickListener {
     private var BUTTON_TYPE = 0 //  1 is change profile, 2 is create new employee
     private var contactPost: ContactPost = ContactPost()
     private var custom: Custom = Custom()
+    var fJsonViewModel: FJsonViewModel = FJsonViewModel()
     private var arrayList: ArrayList<Contact> = ArrayList()
     val REQUEST_SELECT_IMAGE = 1111
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_update_employee)
         init()
+        fJsonViewModel =
+            ViewModelProviders.of(this).get<FJsonViewModel>(FJsonViewModel::class.java)
     }
-
 
     private fun setDefaultInformation() {
         edt_InputAge.setText(contactPost.custom?.stringAge)
@@ -45,8 +46,6 @@ class CreateAndUpdateEmployee : AppCompatActivity(), View.OnClickListener {
         if ( contactPost.custom?.stringImage != null) {
             img_AvatarCreateOrUpdate.setImageURI(Uri.parse(contactPost.custom?.stringImage))
         }
-
-
     }
 
     private fun init() {
@@ -64,10 +63,8 @@ class CreateAndUpdateEmployee : AppCompatActivity(), View.OnClickListener {
                 edt_InputEmail.isFocusable = false
             } else if (BUTTON_TYPE == 2) {
                 this.arrayList = bundle.getSerializable("CONTACT_LIST") as ArrayList<Contact>
-
             }
         }
-
     }
 
     @RequiresApi(Build.VERSION_CODES.KITKAT)
@@ -93,11 +90,11 @@ class CreateAndUpdateEmployee : AppCompatActivity(), View.OnClickListener {
 
     private var isFinish = 0
     fun checkFinish() {
-        if (isFinish == 1) {
+
             val intent: Intent = Intent()
             setResult(Activity.RESULT_OK, intent)
             this.finish()
-        }
+
 
     }
 
@@ -120,69 +117,14 @@ class CreateAndUpdateEmployee : AppCompatActivity(), View.OnClickListener {
         } else {
             this.custom?.stringAge = edt_InputAge.text.toString().trim()
             this.contactPost.custom = this.custom
-            this.contactPost.lastName = edt_InputLastName.text.toString().trim()
+            this.contactPost.lastName = edt_InputLastName.text.toString().trim() + " "
             this.contactPost.firstName = edt_InputFirstName.text.toString().trim()
             this.contactPost.email = edt_InputEmail.text.toString().trim()
             var bodyPost = BodyPost()
             bodyPost.contactPost = this.contactPost
 
-            val callInsert = RetrofitClient.instance.insertContact(bodyPost)
-            val dialog = MaterialDialog(this)
-                .noAutoDismiss()
-                .customView(R.layout.dialog_processbar)
-            dialog.show()
-            dialog.setCancelable(false)
-            dialog.btn_CancelUpdate.setOnClickListener() {
-                callInsert.cancel()
-            }
-            callInsert.enqueue(object : Callback<Contact> {
-                override fun onFailure(call: Call<Contact>, t: Throwable) {
-                    Log.d("AAAAACreate Failure", t.message)
-                    dialog.dismiss()
-                    if (callInsert.isCanceled) {
-                        Toast.makeText(
-                            applicationContext,
-                            "Canceled Successful!",
-                            Toast.LENGTH_SHORT
-                        )
-                            .show()
-                    } else {
-                        Toast.makeText(
-                            applicationContext,
-                            "Save failed! Please try again!",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
+            fJsonViewModel.createContact(this, bodyPost,this)
 
-                override fun onResponse(
-                    call: Call<Contact>,
-                    response: Response<Contact>
-                ) {
-                    if (response.isSuccessful) {
-                        Toast.makeText(
-                            applicationContext,
-                            "Saved Successful!",
-                            Toast.LENGTH_SHORT
-                        )
-                            .show()
-                        isFinish = 1
-                        checkFinish()
-                        Log.d("AAAAACreate response", response.body()?.contactId)
-                    } else {
-                        Toast.makeText(
-                            applicationContext,
-                            "Save failed! Please try again!",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        Log.d(
-                            "AAAAAACreate response !",
-                            response.code().toString() + response.message()
-                        )
-                    }
-                    dialog.dismiss()
-                }
-            })
 
         }
 
