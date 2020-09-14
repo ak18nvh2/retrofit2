@@ -10,7 +10,7 @@ import com.example.testretrofit2.models.Contact
 
 
 class ContactAdapter(var mContext : Context, var iRecyclerViewWithHomeActivity: IRecyclerViewWithHomeActivity) : RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
-    private var list : ArrayList<Contact>?= ArrayList<Contact>()
+    private var list : ArrayList<Contact>?= ArrayList()
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val id : TextView = itemView.findViewById(R.id.tv_Id)
         val name : TextView = itemView.findViewById(R.id.tv_Name)

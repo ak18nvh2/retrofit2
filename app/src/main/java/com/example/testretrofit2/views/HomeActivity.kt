@@ -26,7 +26,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
     private val REQUEST_HOME_TO_CREATE_OR_UPDATE = 10
     var contactAdapter: ContactAdapter? = null
     var fJsonViewModel: FJsonViewModel = FJsonViewModel()
-
+    var isInitList = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -51,13 +51,17 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         btn_sortACSByFirstName.setOnClickListener(this)
         btn_sortDESCByFirstName.setOnClickListener(this)
         btn_sortASCByAge.setOnClickListener(this)
+        btn_Search.setOnClickListener(this)
         btn_sortDESCByAge.setOnClickListener(this)
     }
 
     private fun registerLiveDataListener(){
         val fJsonObserver = Observer<List<Contact>> { newListContact ->
             contactAdapter?.setList(newListContact as ArrayList<Contact>)
-            this.list = newListContact as ArrayList<Contact>?
+            if(isInitList == 0){
+                isInitList = 1
+                this.list = newListContact as ArrayList<Contact>?
+            }
          }
         fJsonViewModel.listContact.observe(this, fJsonObserver)
     }
@@ -86,6 +90,12 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
             }
             btn_sortDESCByAge -> {
                 fJsonViewModel.sortDESCByAge()
+            }
+            edt_SearchInput -> {
+                fJsonViewModel.listContact.value = this.list
+            }
+            btn_Search -> {
+                fJsonViewModel.searchByName(edt_SearchInput.text.toString(), this.list!!)
             }
 
         }

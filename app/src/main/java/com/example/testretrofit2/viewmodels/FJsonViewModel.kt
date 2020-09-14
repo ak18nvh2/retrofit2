@@ -27,7 +27,6 @@ import kotlin.collections.ArrayList
 class FJsonViewModel : ViewModel() {
     var listContact: MutableLiveData<List<Contact>> = MutableLiveData()
 
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     fun sortASCByFirstName() {
         var arrListContact =
             this.listContact.value?.sortedWith(compareBy { it.firstName?.toLowerCase() })?.toList()
@@ -53,7 +52,15 @@ class FJsonViewModel : ViewModel() {
                 ?.toList()
         listContact.value = (arrListContact as ArrayList<Contact>).reversed()
     }
-
+    fun  searchByName(name: String, arr: ArrayList<Contact>){
+        var arrayListContact : ArrayList<Contact> = ArrayList()
+        arr.forEachIndexed { index, contact ->
+            if (contact.firstName?.contains(name)!! || contact.lastName?.contains(name)!!){
+                arrayListContact.add(contact)
+            }
+        }
+        this.listContact.value = arrayListContact
+    }
     fun readFJson(context: Context) {
         val dialogProcess = MaterialDialog(context)
             .noAutoDismiss()

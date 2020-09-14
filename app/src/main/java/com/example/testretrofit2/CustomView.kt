@@ -1,4 +1,4 @@
-package com.example.testretrofit2.models
+package com.example.testretrofit2
 
 import android.content.Context
 import android.graphics.Color
@@ -11,7 +11,6 @@ import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.res.ResourcesCompat
-import com.example.testretrofit2.R
 import kotlinx.android.synthetic.main.activity_create_update_employee.view.*
 
 class CustomView : AppCompatEditText {
@@ -23,10 +22,9 @@ class CustomView : AppCompatEditText {
         context,
         attrs,
         defStyleAttr)
-    val validateEmail: String = "[a-zA-Z0-9]+@[a-z]+\\.[a-z]+"
+    val validateEmail: String = "[a-zA-Z0-9_.]+@[a-zA-Z]+\\.[a-zA-Z]+"
     var mImage : Drawable? = null
     init {
-
          mImage = ResourcesCompat.getDrawable(
             resources,
             R.drawable.ic_baseline_check_24, null
@@ -36,7 +34,6 @@ class CustomView : AppCompatEditText {
                 s: CharSequence,
                 start: Int, count: Int, after: Int
             ) {
-                // Do nothing.
             }
 
             override fun onTextChanged(
@@ -52,27 +49,25 @@ class CustomView : AppCompatEditText {
                     showImage()
                 }
                 else{
-                    hideImage(this@CustomView)
+                    hideImage()
                 }
             }
         })
     }
-    // mở hoặc hộ cái
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     fun showImage(){
-        // cái này là set vị trí hiện ảnh, cái t để mImage là vị trí bên phải đấy
         this.setCompoundDrawablesRelativeWithIntrinsicBounds(
             null, null, mImage, null
         )
-        edt_InputEmail.setTextColor(Color.BLACK)
+        this.setTextColor(Color.BLACK)
     }
 
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-    fun hideImage(view : View){
+    fun hideImage(){
         this.setCompoundDrawablesRelativeWithIntrinsicBounds(
             null, null, null, null
         )
-        edt_InputEmail.setTextColor(Color.RED)
+        this.setTextColor(Color.RED)
     }
 }
 

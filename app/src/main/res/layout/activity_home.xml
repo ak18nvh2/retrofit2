@@ -8,13 +8,6 @@
     <androidx.constraintlayout.widget.Guideline
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/gl_01"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.3"
-        ></androidx.constraintlayout.widget.Guideline>
-    <androidx.constraintlayout.widget.Guideline
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5"
         android:id="@+id/gl_ver0.5"
