@@ -1,6 +1,8 @@
 package com.example.testretrofit2
 
+import com.example.testretrofit2.models.BodyPost
 import com.example.testretrofit2.models.Contact
+import com.example.testretrofit2.models.FJsonGet
 import retrofit2.Call
 import retrofit2.http.*
 

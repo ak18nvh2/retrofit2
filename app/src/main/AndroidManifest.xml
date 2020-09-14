@@ -12,9 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DetailActivity"></activity>
-        <activity android:name=".CreateAndUpdateEmployeeActivity" />
-        <activity android:name=".HomeActivity">
+        <activity android:name=".views.DetailActivity"></activity>
+        <activity android:name=".views.CreateAndUpdateEmployeeActivity" />
+        <activity android:name=".views.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

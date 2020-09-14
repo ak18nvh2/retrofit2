@@ -1,4 +1,4 @@
-package com.example.testretrofit2
+package com.example.testretrofit2.views
 
 import android.app.Activity
 import android.content.Intent
@@ -11,7 +11,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
+import com.example.testretrofit2.ContactAdapter
+import com.example.testretrofit2.R
 import com.example.testretrofit2.models.Contact
+import com.example.testretrofit2.models.ContactPost
+import com.example.testretrofit2.models.Custom
+import com.example.testretrofit2.viewmodels.FJsonViewModel
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.dialog_select.*
 
@@ -21,7 +26,6 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
     private val REQUEST_HOME_TO_CREATE_OR_UPDATE = 10
     var contactAdapter: ContactAdapter? = null
     var fJsonViewModel: FJsonViewModel = FJsonViewModel()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +39,8 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         recyclerView.adapter = contactAdapter
 
         fJsonViewModel =
-            ViewModelProviders.of(this).get<FJsonViewModel>(FJsonViewModel::class.java)
+            ViewModelProviders.of(this).get<FJsonViewModel>(
+                FJsonViewModel::class.java)
         fJsonViewModel.readFJson(this)
         registerLiveDataListener()
 
@@ -45,13 +50,15 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
         btn_CreateNewContact.setOnClickListener(this)
         btn_sortACSByFirstName.setOnClickListener(this)
         btn_sortDESCByFirstName.setOnClickListener(this)
-
-
-
+        btn_sortASCByAge.setOnClickListener(this)
+        btn_sortDESCByAge.setOnClickListener(this)
     }
 
     private fun registerLiveDataListener(){
-        val fJsonObserver = Observer<List<Contact>> { newListContact -> contactAdapter?.setList(newListContact as ArrayList<Contact>) }
+        val fJsonObserver = Observer<List<Contact>> { newListContact ->
+            contactAdapter?.setList(newListContact as ArrayList<Contact>)
+            this.list = newListContact as ArrayList<Contact>?
+         }
         fJsonViewModel.listContact.observe(this, fJsonObserver)
     }
 
@@ -74,11 +81,19 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener,
             btn_sortDESCByFirstName -> {
                 fJsonViewModel.sortDESCByFirstName()
             }
+            btn_sortASCByAge -> {
+                fJsonViewModel.sortASCByAge()
+            }
+            btn_sortDESCByAge -> {
+                fJsonViewModel.sortDESCByAge()
+            }
+
         }
     }
 
     private fun readData() {
         fJsonViewModel.readFJson(this)
+        this.list = fJsonViewModel.listContact.value as ArrayList<Contact>?
     }
 
     override fun doSomeThingOnClick(contact: Contact) {

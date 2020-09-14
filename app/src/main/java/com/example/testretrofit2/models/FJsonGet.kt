@@ -1,4 +1,4 @@
-package com.example.testretrofit2
+package com.example.testretrofit2.models
 
 import com.example.testretrofit2.models.Contact
 import com.google.gson.annotations.Expose

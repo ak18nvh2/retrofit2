@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateAndUpdateEmployeeActivity">
+    tools:context=".views.CreateAndUpdateEmployeeActivity">
     <ImageView
         android:id="@+id/img_AvatarCreateOrUpdate"
         android:layout_width="100dp"
@@ -62,7 +62,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="@id/edt_InputLastName"></TextView>
 
-    <EditText
+    <com.example.testretrofit2.models.CustomView
         android:id="@+id/edt_InputEmail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -72,7 +72,7 @@
         app:layout_constraintBottom_toTopOf="@id/edt_InputAge"
         app:layout_constraintLeft_toRightOf="@id/tv_SalaryCreateOrUpdate"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edt_InputLastName"></EditText>
+        app:layout_constraintTop_toBottomOf="@id/edt_InputLastName"></com.example.testretrofit2.models.CustomView>
 
     <TextView
         android:id="@+id/tv_SalaryCreateOrUpdate"
